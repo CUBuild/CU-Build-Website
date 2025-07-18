@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Users, Trophy, Lightbulb, ExternalLink, CreditCard, MapPin, Clock, Heart, Award, Coffee } from 'lucide-react';
+import logo from "./assets/cu-build-logo.png";
+import logoDark from "./assets/cu-build-logo-dark.png";
 
 const App = () => {
   const [ticketingMode, setTicketingMode] = useState('external'); // 'external' or 'integrated'
@@ -11,34 +13,12 @@ const App = () => {
     regularPrice: '$199'
   });
 
-  const CUBuildLogo = () => (
-    <div className="relative w-16 h-16 mx-auto mb-6">
-      <div className="grid grid-cols-3 gap-1 w-full h-full">
-        {[...Array(9)].map((_, i) => (
-          <div
-            key={i}
-            className={`rounded-lg transform transition-all duration-300 hover:scale-110 ${
-              i === 0 ? 'bg-pink-500' :
-              i === 1 ? 'bg-green-500' :
-              i === 2 ? 'bg-yellow-400' :
-              i === 3 ? 'bg-cyan-400' :
-              i === 4 ? 'bg-purple-600' :
-              i === 5 ? 'bg-pink-500' :
-              i === 6 ? 'bg-green-500' :
-              i === 7 ? 'bg-yellow-400' :
-              'bg-cyan-400'
-            }`}
-            style={{
-              backgroundColor: i === 0 || i === 5 ? '#e31a90' :
-                              i === 1 || i === 6 ? '#3baf49' :
-                              i === 2 || i === 7 ? '#f6de08' :
-                              i === 3 || i === 8 ? '#52c2ec' :
-                              '#613395'
-            }}
-          />
-        ))}
-      </div>
-    </div>
+  const CULogo: React.FC<{ isSmall?: boolean, isDark?: boolean }> = ({ isSmall, isDark }) => (
+    <img 
+      src={isDark ? logoDark : logo} 
+      alt="CU Build Logo" 
+      className={isSmall ? 'h-12 w-22' : 'h-auto mx-auto mb-6 w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80'} 
+    />
   );
 
   const TicketingSection = () => {
@@ -117,26 +97,7 @@ const App = () => {
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10">
-                <div className="grid grid-cols-3 gap-0.5 w-full h-full">
-                  {[...Array(9)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="rounded-sm"
-                      style={{
-                        backgroundColor: i === 0 || i === 5 ? '#e31a90' :
-                                        i === 1 || i === 6 ? '#3baf49' :
-                                        i === 2 || i === 7 ? '#f6de08' :
-                                        i === 3 || i === 8 ? '#52c2ec' :
-                                        '#613395'
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-              <h1 className="text-2xl font-bold text-gray-800">CU Build</h1>
-            </div>
+            <CULogo isDark isSmall/>
             <nav className="hidden md:flex space-x-8">
               <a href="#about" className="text-gray-600 hover:text-pink-500 transition-colors">About</a>
               <a href="#schedule" className="text-gray-600 hover:text-pink-500 transition-colors">Schedule</a>
@@ -149,10 +110,12 @@ const App = () => {
       {/* Hero Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <CUBuildLogo />
-          <h2 className="text-5xl md:text-7xl font-bold text-gray-800 mb-6">
-            CU <span style={{color: '#e31a90'}}>Build</span>
-          </h2>
+          <CULogo isDark />
+          {/* <img 
+            src={logo} 
+            alt="CU Build Logo" 
+            className="mx-auto mb-6 w-48 sm:w-56 md:w-64 lg:w-72 xl:w-80 h-auto" 
+          /> */}
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
             Join credit union professionals in building innovative solutions for our industry in a cooperative, 
             exciting, and competitive environment.
@@ -545,7 +508,10 @@ const App = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
+              <div className='flex items-center gap-2 mb-4'>
+                <CULogo isSmall />
+              </div>
+              {/* <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8">
                   <div className="grid grid-cols-3 gap-0.5 w-full h-full">
                     {[...Array(9)].map((_, i) => (
@@ -564,7 +530,7 @@ const App = () => {
                   </div>
                 </div>
                 <h4 className="text-xl font-bold">CU Build</h4>
-              </div>
+              </div> */}
               <p className="text-gray-400">
                 Building the future of credit unions through innovation and collaboration.
               </p>
