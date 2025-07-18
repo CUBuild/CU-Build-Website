@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { Users, Trophy, Lightbulb, ExternalLink, CreditCard } from 'lucide-react';
 import logo from "./assets/cu-build-logo.png";
 import logoDark from "./assets/cu-build-logo-dark.png";
+import { useLocation } from 'react-router';
 
 const Header: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
             <Link to="/" className="text-gray-600 hover:text-pink-500 transition-colors">Home</Link>
             <Link to="/schedule" className="text-gray-600 hover:text-pink-500 transition-colors">Schedule</Link>
             <Link to="/register" className="text-gray-600 hover:text-pink-500 transition-colors">Register</Link>
-            <Link to="/sponsorship" className="text-gray-600 hover:text-pink-500 transition-colors">Sponsorship</Link>
+            <Link to="/sponsors" className="text-gray-600 hover:text-pink-500 transition-colors">Sponsors</Link>
           </nav>
         </div>
       </div>
@@ -428,9 +429,10 @@ const Footer: React.FC = () => {
           <div>
             <h5 className="font-semibold mb-4">Quick Links</h5>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
-              <li><a href="#schedule" className="hover:text-white transition-colors">Schedule</a></li>
-              <li><a href="#register" className="hover:text-white transition-colors">Register</a></li>
+              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/schedule" className="hover:text-white transition-colors">Schedule</Link></li>
+              <li><Link to="/register" className="hover:text-white transition-colors">Register</Link></li>
+              <li><Link to="/sponsors" className="hover:text-white transition-colors">Sponsors</Link></li>
             </ul>
           </div>
           <div>
@@ -482,6 +484,128 @@ const Sponsorship: React.FC = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">Our Sponsors</h2>
+        
+        {/* Platinum Sponsors */}
+        <div className="mb-20">
+          <h3 className="text-3xl font-bold text-center mb-8" style={{color: '#e31a90'}}>Platinum Sponsors</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
+            {[1, 2, 3].map((i) => (
+              <div key={`platinum-${i}`} className="w-full max-w-[300px] aspect-[3/2] bg-white rounded-lg shadow-lg p-6 flex items-center justify-center transform hover:scale-105 transition-transform">
+                <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
+                  <span className="text-gray-400 text-lg font-semibold">Platinum Sponsor {i}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Gold Sponsors */}
+        <div className="mb-20">
+          <h3 className="text-3xl font-bold text-center mb-8 text-yellow-500">Gold Sponsors</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={`gold-${i}`} className="w-full max-w-[240px] aspect-[3/2] bg-white rounded-lg shadow-lg p-6 flex items-center justify-center transform hover:scale-105 transition-transform">
+                <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
+                  <span className="text-gray-400 text-lg font-semibold">Gold Sponsor {i}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Partner Organizations */}
+        <div className="mb-20">
+          <h3 className="text-3xl font-bold text-center mb-8 text-purple-500">Partner Organizations</h3>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-center justify-items-center">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={`partner-${i}`} className="w-full max-w-[200px] aspect-[3/2] bg-white rounded-lg shadow-lg p-4 flex items-center justify-center transform hover:scale-105 transition-transform">
+                <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
+                  <span className="text-gray-400 text-sm font-semibold">Partner {i}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Integration Partners */}
+        <div className="mb-20">
+          <h3 className="text-3xl font-bold text-center mb-12 text-indigo-600">Integration Partners</h3>
+          <div className="space-y-8">
+            {/* Integration Partner 1 */}
+            <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
+              <div className="w-full md:w-1/4 aspect-[3/2] bg-gray-100 rounded-lg flex items-center justify-center p-4">
+                <span className="text-gray-400 text-lg font-semibold">Partner Logo 1</span>
+              </div>
+              <div className="w-full md:w-3/4">
+                <h4 className="text-xl font-bold mb-3">Financial Core Integration</h4>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Integration Partner 2 */}
+            <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
+              <div className="w-full md:w-1/4 aspect-[3/2] bg-gray-100 rounded-lg flex items-center justify-center p-4">
+                <span className="text-gray-400 text-lg font-semibold">Partner Logo 2</span>
+              </div>
+              <div className="w-full md:w-3/4">
+                <h4 className="text-xl font-bold mb-3">Payment Processing Solutions</h4>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Integration Partner 3 */}
+            <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
+              <div className="w-full md:w-1/4 aspect-[3/2] bg-gray-100 rounded-lg flex items-center justify-center p-4">
+                <span className="text-gray-400 text-lg font-semibold">Partner Logo 3</span>
+              </div>
+              <div className="w-full md:w-3/4">
+                <h4 className="text-xl font-bold mb-3">Digital Banking Platform</h4>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-indigo-500 mr-2">•</span>
+                    Architecto beatae vitae dicta sunt explicabo nemo enim ipsam.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">Sponsorship Opportunities</h2>
         
         {/* Sponsorship Tiers */}
@@ -668,16 +792,31 @@ const Sponsorship: React.FC = () => {
   );
 };
 
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }, [pathname]);
+
+  return null;
+};
+
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-cyan-50">
         <Header />
         <Routes>
           <Route path="/" element={<><Home /><About /></>} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/sponsorship" element={<Sponsorship />} />
+          <Route path="/sponsors" element={<Sponsorship />} />
         </Routes>
         <Footer />
       </div>
