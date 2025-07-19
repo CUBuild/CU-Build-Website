@@ -44,7 +44,7 @@ const Header: React.FC = () => {
   const faqRoute = useActiveRoute('/faq');
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <header className="bg-white shadow-xl border-b border-gray-100/50 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link to="/" onClick={() => setIsOpen(false)}>
@@ -1173,14 +1173,62 @@ interface PastEventProps {
   winningTeams: WinningTeam[];
 }
 
+const getRandomPrimaryColor = () => {
+  const colors = [
+    { base: '#e31a90', light: 'rgba(227, 26, 144, 0.1)' }, // Pink
+    { base: '#613395', light: 'rgba(97, 51, 149, 0.1)' },  // Purple
+    { base: '#3baf49', light: 'rgba(59, 175, 73, 0.1)' },  // Green
+    { base: '#52c2ec', light: 'rgba(82, 194, 236, 0.1)' }, // Cyan
+    { base: '#f6de08', light: 'rgba(246, 222, 8, 0.1)' }   // Yellow
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
 const PastEvent: React.FC<PastEventProps> = ({ year, winningTeams }) => {
+  const [backgroundColor] = useState(getRandomPrimaryColor());
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <style>
+        {`
+          @keyframes shimmer {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+
+          .shimmer-bg {
+            background: linear-gradient(
+              120deg,
+              ${backgroundColor.light} 0%,
+              white 25%,
+              ${backgroundColor.light} 50%,
+              white 75%,
+              ${backgroundColor.light} 100%
+            );
+            background-size: 200% 200%;
+            animation: shimmer 15s ease-in-out infinite;
+          }
+        `}
+      </style>
+
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <CULogo isDark />
-          <h2 className="text-4xl font-bold text-gray-800 mt-8 mb-4">CU Build {year}</h2>
-          <p className="text-xl text-gray-600">Celebrating innovation and collaboration</p>
+        <div className="shimmer-bg rounded-3xl mb-20">
+          <div className="max-w-7xl mx-auto py-16">
+            <div className="text-center">
+              <CULogo isDark />
+              <h2 className="text-4xl font-bold mt-8 mb-4" style={{color: backgroundColor.base}}>
+                CU Build {year}
+              </h2>
+              <p className="text-xl text-gray-600">Celebrating innovation and collaboration</p>
+            </div>
+          </div>
         </div>
 
         {/* Winning Teams Section */}
@@ -1279,7 +1327,7 @@ const data2023 = {
 
 const data2022 = {
   winningTeams: [
-    {
+       {
       teamName: "Future Finance",
       projectName: "SecureShare",
       description: "A blockchain-based solution for secure document sharing between credit unions.",
