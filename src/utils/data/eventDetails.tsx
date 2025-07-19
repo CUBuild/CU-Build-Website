@@ -6,15 +6,33 @@ interface EventDetails {
   regularPrice: string;
 }
 
+export const details: EventDetails = {
+  date: 'October 15-16, 2024',
+  location: 'Innovation Center, Denver, CO',
+  capacity: '200 participants',
+  earlyBirdPrice: '$149',
+  regularPrice: '$199',
+};
+
 interface ContactInfo {
   email: string;
   phone?: string;
 }
 
+export const connect: ContactInfo = {
+  email: 'info@cubuild.org',
+  // phone: '(555) 123-4567',
+};
+
 interface SocialMedia {
   linkedin: string;
   discord: string;
 }
+
+export const socialMediaLinks: SocialMedia = {
+  linkedin: 'https://www.linkedin.com/company/cu-build',
+  discord: 'https://discord.gg/cubuild',
+};
 
 interface ScheduleItem {
   time: string;
@@ -27,24 +45,6 @@ type DaySchedule = ScheduleItem[];
 interface Schedule {
   [key: string]: DaySchedule;
 }
-
-export const details: EventDetails = {
-  date: 'October 15-16, 2024',
-  location: 'Innovation Center, Denver, CO',
-  capacity: '200 participants',
-  earlyBirdPrice: '$149',
-  regularPrice: '$199',
-};
-
-export const connect: ContactInfo = {
-  email: 'info@cubuild.org',
-  // phone: '(555) 123-4567',
-};
-
-export const socialMediaLinks: SocialMedia = {
-  linkedin: 'https://www.linkedin.com/company/cu-build',
-  discord: 'https://discord.gg/cubuild',
-};
 
 export const schedule: Schedule = {
   'Day 1 - July 17': [

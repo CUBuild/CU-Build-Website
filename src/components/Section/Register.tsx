@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ExternalLink, CreditCard } from 'lucide-react';
 import { details } from '../../utils/data/eventDetails';
 
+// TODO: add external ticketing link
+// TODO: add section about hotel information and travel tips
 const Register: React.FC = () => {
   const [ticketingMode, setTicketingMode] = useState('external');
 
