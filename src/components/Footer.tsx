@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useActiveRoute from '../utils/hooks/useActiveRoute';
 import Logo from './Logo';
-import { socialMediaLinks, connect } from '../utils/data/eventDetails.js';
-import { baseRoutes, pastRoutes } from '../utils/data/routes.js';
+import { socialMediaLinks, connect } from '../utils/data/eventDetails';
+import { baseRoutes, pastRoutes } from '../utils/data/routes';
 
 const Footer: React.FC = () => {
   return (
@@ -25,9 +25,9 @@ const Footer: React.FC = () => {
               {Object.entries(baseRoutes).map(([key, value]) => (
                 <li key={key}>
                   <Link
-                    to={`/${value.toLowerCase()}`}
-                    className={`transition-colors hover:text-white ${useActiveRoute(value).isActive ? 'font-semibold' : ''}`}
-                    style={useActiveRoute(value).isActive ? { color: useActiveRoute(value).activeColor } : undefined}>
+                    to={`/${(value as string).toLowerCase()}`}
+                    className={`transition-colors hover:text-white ${useActiveRoute(value as string).isActive ? 'font-semibold' : ''}`}
+                    style={useActiveRoute(value as string).isActive ? { color: useActiveRoute(value as string).activeColor } : undefined}>
                     {value as string}
                   </Link>
                 </li>
@@ -42,9 +42,9 @@ const Footer: React.FC = () => {
               {Object.entries(pastRoutes).map(([key, value]) => (
                 <li key={key}>
                   <Link
-                    to={`/${value.toLowerCase()}`}
-                    className={`transition-colors hover:text-white ${useActiveRoute(value).isActive ? 'font-semibold' : ''}`}
-                    style={useActiveRoute(value).isActive ? { color: useActiveRoute(value).activeColor } : undefined}>
+                    to={`/${(value as string).toLowerCase()}`}
+                    className={`transition-colors hover:text-white ${useActiveRoute(value as string).isActive ? 'font-semibold' : ''}`}
+                    style={useActiveRoute(value as string).isActive ? { color: useActiveRoute(value as string).activeColor } : undefined}>
                     {value as string}
                   </Link>
                 </li>

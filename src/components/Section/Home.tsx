@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../Logo';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -14,16 +15,9 @@ const Home: React.FC = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={() => navigate('/register')}
             className="py-4 px-8 rounded-xl font-bold text-white text-lg transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{ backgroundColor: '#e31a90' }}>
-            Register Now
-          </button>
-          <button
-            onClick={() => navigate('/about')}
-            className="py-4 px-8 rounded-xl font-bold text-lg transform transition-all duration-300 hover:scale-105 border-2 hover:bg-gray-50"
-            style={{ borderColor: '#613395', color: '#613395' }}>
-            Learn More
+            <Link to="/register">Register Now</Link>
           </button>
         </div>
       </div>
