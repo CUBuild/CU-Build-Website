@@ -253,21 +253,21 @@ const About: React.FC = () => {
               The idea turned to dreams and visions and lots of people have helped us along the way.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-8">
-              <div className="text-center p-4 rounded-lg bg-opacity-10" style={{backgroundColor: '#e31a90'}}>
-                <div className="text-3xl font-bold" style={{color: '#e31a90'}}>72</div>
-                <div className="text-sm text-gray-600">Hours of Innovation</div>
+              <div className="text-center p-4 rounded-lg bg-opacity-90" style={{backgroundColor: '#e31a90'}}>
+                <div className="text-3xl font-bold text-white mb-1">300+</div>
+                <div className="text-sm text-white font-medium">Total Participants</div>
               </div>
-              <div className="text-center p-4 rounded-lg bg-opacity-10" style={{backgroundColor: '#3baf49'}}>
-                <div className="text-3xl font-bold" style={{color: '#3baf49'}}>300+</div>
-                <div className="text-sm text-gray-600">Total Participants</div>
+              <div className="text-center p-4 rounded-lg bg-opacity-90" style={{backgroundColor: '#3baf49'}}>
+                <div className="text-3xl font-bold text-white mb-1">5</div>
+                <div className="text-sm text-white font-medium">Years Building</div>
               </div>
-              <div className="text-center p-4 rounded-lg bg-opacity-10" style={{backgroundColor: '#52c2ec'}}>
-                <div className="text-3xl font-bold" style={{color: '#52c2ec'}}>5+</div>
-                <div className="text-sm text-gray-600">Years Running</div>
+              <div className="text-center p-4 rounded-lg bg-opacity-90" style={{backgroundColor: '#52c2ec'}}>
+                <div className="text-3xl font-bold text-white mb-1">20+</div>
+                <div className="text-sm text-white font-medium">Sponsors</div>
               </div>
-              <div className="text-center p-4 rounded-lg bg-opacity-10" style={{backgroundColor: '#f6de08'}}>
-                <div className="text-3xl font-bold" style={{color: '#f6de08'}}>50+</div>
-                <div className="text-sm text-gray-600">Solutions Built</div>
+              <div className="text-center p-4 rounded-lg bg-opacity-90" style={{backgroundColor: '#613395'}}>
+                <div className="text-3xl font-bold text-white mb-1">50+</div>
+                <div className="text-sm text-white font-medium">Projects Built</div>
               </div>
             </div>
           </div>
