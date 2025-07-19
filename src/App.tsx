@@ -125,40 +125,40 @@ const Header: React.FC = () => {
           <nav className="flex flex-col p-4">
             <button
               onClick={() => handleNavigation('/')}
-              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
-                homeRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
+                homeRoute.isActive ? 'bg-white/20 font-semibold' : ''
               }`}
             >
               Home
             </button>
             <button
               onClick={() => handleNavigation('/schedule')}
-              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
-                scheduleRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
+                scheduleRoute.isActive ? 'bg-white/20 font-semibold' : ''
               }`}
             >
               Schedule
             </button>
             <button
               onClick={() => handleNavigation('/register')}
-              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
-                registerRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
+                registerRoute.isActive ? 'bg-white/20 font-semibold' : ''
               }`}
             >
               Register
             </button>
             <button
               onClick={() => handleNavigation('/sponsors')}
-              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
-                sponsorsRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
+                sponsorsRoute.isActive ? 'bg-white/20 font-semibold' : ''
               }`}
             >
               Sponsors
             </button>
             <button
               onClick={() => handleNavigation('/faq')}
-              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
-                faqRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
+                faqRoute.isActive ? 'bg-white/20 font-semibold' : ''
               }`}
             >
               FAQ
@@ -1339,7 +1339,7 @@ const App: React.FC = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/sponsors" element={<Sponsorship />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/2024" element={<PastEvent year="2024" winningTeams={data2024.winningTeams} />} />
+                   <Route path="/2024" element={<PastEvent year="2024" winningTeams={data2024.winningTeams} />} />
           <Route path="/2023" element={<PastEvent year="2023" winningTeams={data2023.winningTeams} />} />
           <Route path="/2022" element={<PastEvent year="2022" winningTeams={data2022.winningTeams} />} />
           <Route path="/2021" element={<PastEvent year="2021" winningTeams={data2021.winningTeams} />} />
