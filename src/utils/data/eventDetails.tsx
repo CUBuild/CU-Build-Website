@@ -19,6 +19,7 @@ interface SocialMedia {
 interface ScheduleItem {
   time: string;
   activity: string;
+  description?: string; // Optional description for activities
 }
 
 type DaySchedule = ScheduleItem[];
@@ -46,15 +47,15 @@ export const socialMediaLinks: SocialMedia = {
 };
 
 export const schedule: Schedule = {
-  'Day 1': [
-    { time: '9:00 AM', activity: 'Registration & Breakfast' },
+  'Day 1 - July 17': [
+    { time: '9:00 AM', activity: 'Registration & Breakfast', description: 'Check-in, networking, and opening remarks' },
     { time: '10:00 AM', activity: 'Opening Ceremony' },
     { time: '11:00 AM', activity: 'Keynote Speaker' },
     { time: '12:00 PM', activity: 'Lunch' },
     { time: '1:00 PM', activity: 'Workshops & Sessions' },
     { time: '5:00 PM', activity: 'Networking Event' },
   ],
-  'Day 2': [
+  'Day 2 - July 18': [
     { time: '9:00 AM', activity: 'Breakfast' },
     { time: '10:00 AM', activity: 'Hackathon Begins' },
     { time: '12:00 PM', activity: 'Lunch' },
