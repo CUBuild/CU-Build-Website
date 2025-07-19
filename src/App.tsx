@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Users, Trophy, Lightbulb, ExternalLink, CreditCard } from 'lucide-react';
 import logo from "./assets/cu-build-logo.png";
 import logoDark from "./assets/cu-build-logo-dark.png";
-import { useLocation } from 'react-router';
+
+const useActiveRoute = (path: string) => {
+  const location = useLocation();
+  const [color, setColor] = useState('#e31a90');
+
+  useEffect(() => {
+    const colors = ['#e31a90', '#613395', '#3baf49', '#52c2ec', '#f6de08'];
+    let currentIndex = 0;
+
+    if (location.pathname === path) {
+      const interval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % colors.length;
+        setColor(colors[currentIndex]);
+      }, 3000); // Change color every 3 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [location.pathname, path]);
+
+  return {
+    isActive: location.pathname === path,
+    activeColor: color
+  };
+};
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +36,12 @@ const Header: React.FC = () => {
     setIsOpen(false);
     navigate(path);
   };
+
+  const homeRoute = useActiveRoute('/');
+  const scheduleRoute = useActiveRoute('/schedule');
+  const registerRoute = useActiveRoute('/register');
+  const sponsorsRoute = useActiveRoute('/sponsors');
+  const faqRoute = useActiveRoute('/faq');
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -24,11 +53,41 @@ const Header: React.FC = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link to="/" className="text-gray-600 hover:text-pink-500 transition-colors">Home</Link>
-            <Link to="/schedule" className="text-gray-600 hover:text-pink-500 transition-colors">Schedule</Link>
-            <Link to="/register" className="text-gray-600 hover:text-pink-500 transition-colors">Register</Link>
-            <Link to="/sponsors" className="text-gray-600 hover:text-pink-500 transition-colors">Sponsors</Link>
-            <Link to="/faq" className="text-gray-600 hover:text-pink-500 transition-colors">FAQ</Link>
+            <Link 
+              to="/" 
+              className={`transition-colors ${homeRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
+              style={homeRoute.isActive ? { color: homeRoute.activeColor } : undefined}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/schedule" 
+              className={`transition-colors ${scheduleRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
+              style={scheduleRoute.isActive ? { color: scheduleRoute.activeColor } : undefined}
+            >
+              Schedule
+            </Link>
+            <Link 
+              to="/register" 
+              className={`transition-colors ${registerRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
+              style={registerRoute.isActive ? { color: registerRoute.activeColor } : undefined}
+            >
+              Register
+            </Link>
+            <Link 
+              to="/sponsors" 
+              className={`transition-colors ${sponsorsRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
+              style={sponsorsRoute.isActive ? { color: sponsorsRoute.activeColor } : undefined}
+            >
+              Sponsors
+            </Link>
+            <Link 
+              to="/faq" 
+              className={`transition-colors ${faqRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
+              style={faqRoute.isActive ? { color: faqRoute.activeColor } : undefined}
+            >
+              FAQ
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -66,31 +125,41 @@ const Header: React.FC = () => {
           <nav className="flex flex-col p-4">
             <button
               onClick={() => handleNavigation('/')}
-              className="text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors"
+              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
+                homeRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              }`}
             >
               Home
             </button>
             <button
               onClick={() => handleNavigation('/schedule')}
-              className="text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors"
+              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
+                scheduleRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              }`}
             >
               Schedule
             </button>
             <button
               onClick={() => handleNavigation('/register')}
-              className="text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors"
+              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
+                registerRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              }`}
             >
               Register
             </button>
             <button
               onClick={() => handleNavigation('/sponsors')}
-              className="text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors"
+              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
+                sponsorsRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              }`}
             >
               Sponsors
             </button>
             <button
               onClick={() => handleNavigation('/faq')}
-              className="text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors"
+              className={`text-xl py-4 px-4 text-white hover:bg-pink-600 rounded-lg transition-colors ${
+                faqRoute.isActive ? 'bg-white bg-opacity-20' : ''
+              }`}
             >
               FAQ
             </button>
@@ -516,6 +585,16 @@ const Schedule: React.FC = () => {
 };
 
 const Footer: React.FC = () => {
+  const homeRoute = useActiveRoute('/');
+  const scheduleRoute = useActiveRoute('/schedule');
+  const registerRoute = useActiveRoute('/register');
+  const sponsorsRoute = useActiveRoute('/sponsors');
+  const faqRoute = useActiveRoute('/faq');
+  const year2024Route = useActiveRoute('/2024');
+  const year2023Route = useActiveRoute('/2023');
+  const year2022Route = useActiveRoute('/2022');
+  const year2021Route = useActiveRoute('/2021');
+
   return (
     <footer className="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -534,10 +613,51 @@ const Footer: React.FC = () => {
           <div className="text-center md:text-left">
             <h5 className="font-semibold mb-4">Quick Links</h5>
             <ul className="space-y-2 text-gray-400">
-              <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/schedule" className="hover:text-white transition-colors">Schedule</Link></li>
-              <li><Link to="/register" className="hover:text-white transition-colors">Register</Link></li>
-              <li><Link to="/sponsors" className="hover:text-white transition-colors">Sponsors</Link></li>
+              <li>
+                <Link 
+                  to="/" 
+                  className={`transition-colors hover:text-white ${homeRoute.isActive ? 'font-semibold' : ''}`}
+                  style={homeRoute.isActive ? { color: homeRoute.activeColor } : undefined}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/schedule" 
+                  className={`transition-colors hover:text-white ${scheduleRoute.isActive ? 'font-semibold' : ''}`}
+                  style={scheduleRoute.isActive ? { color: scheduleRoute.activeColor } : undefined}
+                >
+                  Schedule
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/register" 
+                  className={`transition-colors hover:text-white ${registerRoute.isActive ? 'font-semibold' : ''}`}
+                  style={registerRoute.isActive ? { color: registerRoute.activeColor } : undefined}
+                >
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/sponsors" 
+                  className={`transition-colors hover:text-white ${sponsorsRoute.isActive ? 'font-semibold' : ''}`}
+                  style={sponsorsRoute.isActive ? { color: sponsorsRoute.activeColor } : undefined}
+                >
+                  Sponsors
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/faq" 
+                  className={`transition-colors hover:text-white ${faqRoute.isActive ? 'font-semibold' : ''}`}
+                  style={faqRoute.isActive ? { color: faqRoute.activeColor } : undefined}
+                >
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -545,10 +665,42 @@ const Footer: React.FC = () => {
           <div className="text-center md:text-left">
             <h5 className="font-semibold mb-4">Previous Years</h5>
             <ul className="space-y-2 text-gray-400">
-              <li><Link to="/2024" className="hover:text-white transition-colors">2024</Link></li>
-              <li><Link to="/2023" className="hover:text-white transition-colors">2023</Link></li>
-              <li><Link to="/2022" className="hover:text-white transition-colors">2022</Link></li>
-              <li><Link to="/2021" className="hover:text-white transition-colors">2021</Link></li>
+              <li>
+                <Link 
+                  to="/2024" 
+                  className={`transition-colors hover:text-white ${year2024Route.isActive ? 'font-semibold' : ''}`}
+                  style={year2024Route.isActive ? { color: year2024Route.activeColor } : undefined}
+                >
+                  2024
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/2023" 
+                  className={`transition-colors hover:text-white ${year2023Route.isActive ? 'font-semibold' : ''}`}
+                  style={year2023Route.isActive ? { color: year2023Route.activeColor } : undefined}
+                >
+                  2023
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/2022" 
+                  className={`transition-colors hover:text-white ${year2022Route.isActive ? 'font-semibold' : ''}`}
+                  style={year2022Route.isActive ? { color: year2022Route.activeColor } : undefined}
+                >
+                  2022
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/2021" 
+                  className={`transition-colors hover:text-white ${year2021Route.isActive ? 'font-semibold' : ''}`}
+                  style={year2021Route.isActive ? { color: year2021Route.activeColor } : undefined}
+                >
+                  2021
+                </Link>
+              </li>
             </ul>
           </div>
 
