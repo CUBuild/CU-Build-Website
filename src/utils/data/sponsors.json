@@ -1,0 +1,11 @@
+{
+  "sponsors": [
+    {
+      "title": "Swivel",
+      "url": "https://getswivel.io",
+      "logo": "https://getswivel.io/logo.png",
+      "isIntegrationPartner": true,
+      "sponsorLevel": "Platinum"
+    }
+  ]
+}
