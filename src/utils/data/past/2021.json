@@ -1,36 +1,36 @@
 {
+  "year": "2021",
   "teams": [
     {
       "teamName": "Innovation Squad",
       "projectName": "Smart Credit",
       "description": "A revolutionary AI-powered credit assessment tool that helps credit unions make faster, more accurate lending decisions.",
-      "track": "Financial Technology",
-      "prize": "First Place",
-      "members": [
-        { "name": "Jane Smith", "role": "Lead Developer" },
-        { "name": "John Doe", "role": "UI/UX Designer" },
-        { "name": "Sarah Johnson", "role": "Business Analyst" }
-      ]
+      "prizes": ["First Place", "Best Use of AI"],
+      "members": ["Alice Johnson", "Bob Smith", "Charlie Brown"]
+    },
+    {
+      "teamName": "Alpha",
+      "projectName": "Smart Credit",
+      "description": "A revolutionary AI-powered credit assessment tool that helps credit unions make faster, more accurate lending decisions.",
+      "prizes": ["First Place", "Best Use of AI"],
+      "members": ["Alice Johnson", "Bob Smith", "Charlie Brown"]
+    },
+    {
+      "teamName": "Zulu",
+      "projectName": "Smart Credit",
+      "description": "A revolutionary AI-powered credit assessment tool that helps credit unions make faster, more accurate lending decisions.",
+      "prizes": ["First Place", "Best Use of AI"],
+      "members": ["Alice Johnson", "Bob Smith", "Charlie Brown"]
     }
   ],
   "sponsors": [
     {
-      "imageUrl": "https://example.com/sponsor1.png",
+      "imageLink": "https://example.com/sponsor1.png",
       "url": "https://example.com/sponsor1"
-    }
-  ],
-  "winningTeams": [
+    },
     {
-      "teamName": "Innovation Squad",
-      "projectName": "Smart Credit",
-      "description": "A revolutionary AI-powered credit assessment tool that helps credit unions make faster, more accurate lending decisions.",
-      "track": "Financial Technology",
-      "prize": "First Place",
-      "members": [
-        { "name": "Jane Smith", "role": "Lead Developer" },
-        { "name": "John Doe", "role": "UI/UX Designer" },
-        { "name": "Sarah Johnson", "role": "Business Analyst" }
-      ]
+      "imageLink": "https://example.com/sponsor1.png",
+      "url": "https://example.com/sponsor1"
     }
   ]
 }

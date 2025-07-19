@@ -1,37 +1,43 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
+import { colors } from '../utils/data/colors';
 
-interface TeamMember {
-  name: string;
-  role: string;
-}
-
-interface WinningTeam {
+interface Teams {
   teamName: string;
   projectName: string;
   description: string;
-  track: string;
-  prize?: string;
-  members: TeamMember[];
+  track?: string;
+  prizes?: string[];
+  members: string[];
+}
+
+interface Sponsors {
+  imageLink: string;
+  url: string;
+}
+
+interface Data {
+  year: string;
+  teams: Teams[];
+  sponsors: Sponsors[];
 }
 
 interface PastEventProps {
-  year: string;
-  winningTeams: WinningTeam[];
+  data: Data;
 }
 
 const getRandomPrimaryColor = () => {
-  const colors = [
-    { base: '#e31a90', light: 'rgba(227, 26, 144, 0.1)' }, // Pink
-    { base: '#613395', light: 'rgba(97, 51, 149, 0.1)' }, // Purple
-    { base: '#3baf49', light: 'rgba(59, 175, 73, 0.1)' }, // Green
-    { base: '#52c2ec', light: 'rgba(82, 194, 236, 0.1)' }, // Cyan
-    { base: '#f6de08', light: 'rgba(246, 222, 8, 0.1)' }, // Yellow
+  const base = [
+    { base: colors.pink, light: `${colors.pink}10` }, // Pink
+    { base: colors.purple, light: `${colors.purple}10` }, // Purple
+    { base: colors.green, light: `${colors.green}10` }, // Green
+    { base: colors.cyan, light: `${colors.cyan}10` }, // Cyan
+    { base: colors.yellow, light: `${colors.yellow}10` }, // Yellow
   ];
-  return colors[Math.floor(Math.random() * colors.length)];
+  return base[Math.floor(Math.random() * base.length)];
 };
 
-const PastEvent: React.FC<PastEventProps> = ({ year, winningTeams }) => {
+const PastEvent: React.FC<PastEventProps> = ({ data }) => {
   const [backgroundColor] = useState(getRandomPrimaryColor());
 
   return (
@@ -71,7 +77,7 @@ const PastEvent: React.FC<PastEventProps> = ({ year, winningTeams }) => {
             <div className="text-center">
               <Logo isDark />
               <h2 className="text-4xl font-bold mt-8 mb-4" style={{ color: backgroundColor.base }}>
-                CU Build {year}
+                CU Build {data.year}
               </h2>
               <p className="text-xl text-gray-600">Celebrating innovation and collaboration</p>
             </div>
@@ -84,50 +90,59 @@ const PastEvent: React.FC<PastEventProps> = ({ year, winningTeams }) => {
             Winning Teams
           </h3>
           <div className="space-y-8">
-            {winningTeams.map((team, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-lg border-2 border-gray-100">
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="lg:w-2/3">
-                    <h4 className="text-2xl font-bold mb-2">{team.teamName}</h4>
-                    <p className="text-xl text-gray-600 mb-4">{team.projectName}</p>
-                    <div className="mb-4">
-                      <span
-                        className="inline-block px-3 py-1 rounded-full text-sm font-semibold"
-                        style={{ backgroundColor: '#e31a90', color: 'white' }}>
-                        {team.track}
-                      </span>
-                      {team.prize && (
-                        <span className="inline-block ml-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-sm font-semibold">
-                          {team.prize}
-                        </span>
-                      )}
+            {Object.entries(data.teams)
+              .sort(([, a], [, b]) => a.teamName.localeCompare(b.teamName))
+              .map(([key, value]) => (
+                <div key={key} className="bg-white p-8 rounded-xl shadow-lg border-2 border-gray-100">
+                  <div className="flex flex-col lg:flex-row gap-8">
+                    <div className="lg:w-2/3">
+                      <h4 className="text-2xl font-bold mb-2">{value.teamName}</h4>
+                      <p className="text-xl text-gray-600 mb-4">{value.projectName}</p>
+                      <div className="mb-4">
+                        {value.track && (
+                          <span
+                            className="inline-block px-3 py-1 rounded-full text-sm font-semibold"
+                            style={{ backgroundColor: '#e31a90', color: 'white' }}>
+                            {value.track}
+                          </span>
+                        )}
+                        {value.prizes &&
+                          value.prizes.map((prizes, key) => (
+                            <span
+                              key={key}
+                              className={`${
+                                prizes.length > 1 && key !== 0 ? 'ml-3' : ''
+                              } inline-block px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-sm font-semibold`}>
+                              {prizes}
+                            </span>
+                          ))}
+                      </div>
+                      <p className="text-gray-600 mb-6">{value.description}</p>
+                      <div className="flex flex-wrap gap-3">
+                        {value.members.map((member, idx) => (
+                          <div key={idx} className="px-3 py-1 rounded-lg bg-gray-100 text-gray-600 text-sm">
+                            {member}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <p className="text-gray-600 mb-6">{team.description}</p>
-                    <div className="flex flex-wrap gap-3">
-                      {team.members.map((member, idx) => (
-                        <div key={idx} className="px-3 py-1 rounded-lg bg-gray-100 text-gray-600 text-sm">
-                          {member.name} - {member.role}
-                        </div>
-                      ))}
-                    </div>
+                    {/* <div className="lg:w-1/3">
+                  <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-400">Project Screenshot</span>
                   </div>
-                  <div className="lg:w-1/3">
-                    <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                      <span className="text-gray-400">Project Screenshot</span>
-                    </div>
+                </div> */}
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
         {/* Sponsors Section */}
         <div>
-          <h3 className="text-3xl font-bold text-center mb-12">Our {year} Sponsors</h3>
+          <h3 className="text-3xl font-bold text-center mb-12">Our {data.year} Sponsors</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div key={index} className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+            {Object.entries(data.sponsors).map(([key, value]) => (
+              <div key={key} className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
                 <span className="text-gray-400">Sponsor Logo</span>
               </div>
             ))}

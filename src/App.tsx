@@ -41,11 +41,10 @@ const App: React.FC = () => {
           <Route path="/sponsors" element={<Sponsorship />} />
           <Route path="/faq" element={<FAQ />} />
           {/* TODO: create a last years specific tab once the event is over */}
-          {/* TODO: change JSON files to call just general data */}
-          <Route path="/2024" element={<PastEvent year="2024" winningTeams={data2024.winningTeams} />} />
-          <Route path="/2023" element={<PastEvent year="2023" winningTeams={data2023.winningTeams} />} />
-          <Route path="/2022" element={<PastEvent year="2022" winningTeams={data2022.winningTeams} />} />
-          <Route path="/2021" element={<PastEvent year="2021" winningTeams={data2021.winningTeams} />} />
+          <Route path="/2021" element={<PastEvent data={data2021} />} />
+          <Route path="/2022" element={<PastEvent data={data2022} />} />
+          <Route path="/2023" element={<PastEvent data={data2023} />} />
+          <Route path="/2024" element={<PastEvent data={data2024} />} />
         </Routes>
         <Footer />
       </div>

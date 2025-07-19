@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import useActiveRoute from '../utils/hooks/useActiveRoute';
+import { baseRoutes } from '../utils/data/routes';
+import { colors } from '../utils/data/colors';
+import { socialMediaLinks } from '../utils/data/eventDetails';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,12 +14,6 @@ const Header: React.FC = () => {
     setIsOpen(false);
     navigate(path);
   };
-
-  const homeRoute = useActiveRoute('/');
-  const scheduleRoute = useActiveRoute('/schedule');
-  const registerRoute = useActiveRoute('/register');
-  const sponsorsRoute = useActiveRoute('/sponsors');
-  const faqRoute = useActiveRoute('/faq');
 
   return (
     <header className="bg-white shadow-xl border-b border-gray-100/50 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
@@ -28,36 +25,17 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <Link
-              to="/"
-              className={`transition-colors ${homeRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
-              style={homeRoute.isActive ? { color: homeRoute.activeColor } : undefined}>
-              Home
-            </Link>
-            <Link
-              to="/schedule"
-              className={`transition-colors ${scheduleRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
-              style={scheduleRoute.isActive ? { color: scheduleRoute.activeColor } : undefined}>
-              Schedule
-            </Link>
-            <Link
-              to="/register"
-              className={`transition-colors ${registerRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
-              style={registerRoute.isActive ? { color: registerRoute.activeColor } : undefined}>
-              Register
-            </Link>
-            <Link
-              to="/sponsors"
-              className={`transition-colors ${sponsorsRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
-              style={sponsorsRoute.isActive ? { color: sponsorsRoute.activeColor } : undefined}>
-              Sponsors
-            </Link>
-            <Link
-              to="/faq"
-              className={`transition-colors ${faqRoute.isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
-              style={faqRoute.isActive ? { color: faqRoute.activeColor } : undefined}>
-              FAQ
-            </Link>
+            {Object.entries(baseRoutes).map(([key, value]) => (
+              <Link
+                to={`/${value !== 'Home' ? (value as string).toLowerCase().replaceAll('.', '') : ''}`}
+                key={key}
+                className={`transition-colors ${
+                  useActiveRoute(`/${value as String}`).isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'
+                }`}
+                style={useActiveRoute(`/${value as String}`).isActive ? { color: useActiveRoute(`/${value as String}`).activeColor } : undefined}>
+                {value}
+              </Link>
+            ))}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -82,54 +60,30 @@ const Header: React.FC = () => {
           </button>
         </div>
 
+        {/* TODO: prevent scroll or just extend the length of the menu page?... */}
         {/* Mobile Navigation */}
         <div
           className={`md:hidden fixed left-0 right-0 w-full min-h-screen transform transition-transform duration-300 ease-in-out ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
-          style={{ top: '72px', backgroundColor: '#E31A90' }}>
+          style={{ top: '72px', backgroundColor: colors.pink }}>
           <nav className="flex flex-col p-4">
-            <button
-              onClick={() => handleNavigation('/')}
-              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
-                homeRoute.isActive ? 'bg-white/20 font-semibold' : ''
-              }`}>
-              Home
-            </button>
-            <button
-              onClick={() => handleNavigation('/schedule')}
-              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
-                scheduleRoute.isActive ? 'bg-white/20 font-semibold' : ''
-              }`}>
-              Schedule
-            </button>
-            <button
-              onClick={() => handleNavigation('/register')}
-              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
-                registerRoute.isActive ? 'bg-white/20 font-semibold' : ''
-              }`}>
-              Register
-            </button>
-            <button
-              onClick={() => handleNavigation('/sponsors')}
-              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
-                sponsorsRoute.isActive ? 'bg-white/20 font-semibold' : ''
-              }`}>
-              Sponsors
-            </button>
-            <button
-              onClick={() => handleNavigation('/faq')}
-              className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
-                faqRoute.isActive ? 'bg-white/20 font-semibold' : ''
-              }`}>
-              FAQ
-            </button>
+            {Object.entries(baseRoutes).map(([key, value]) => (
+              <button
+                key={key}
+                onClick={() => handleNavigation(`/${value !== 'Home' ? (value as string).toLowerCase().replaceAll('.', '') : ''}`)}
+                className={`text-xl py-4 px-4 text-white hover:bg-white/20 rounded-lg transition-colors ${
+                  useActiveRoute(`/${value as String}`).isActive ? 'bg-white/20 font-semibold' : ''
+                }`}>
+                {value}
+              </button>
+            ))}
 
             {/* Social Media Links */}
             <div className="mt-auto border-t border-pink-400 pt-4 px-4">
               <div className="flex justify-center space-x-6">
                 <a
-                  href="https://linkedin.com/company/cu-build"
+                  href={socialMediaLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-pink-200 transition-colors">
@@ -138,7 +92,7 @@ const Header: React.FC = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://discord.gg/cubuild"
+                  href={socialMediaLinks.discord}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-pink-200 transition-colors">

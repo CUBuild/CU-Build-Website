@@ -1,17 +1,17 @@
 interface baseRoutes {
   home: string;
-  about: string;
-  register: string;
-  sponsors: string;
+  schedule: string;
   faq: string;
+  sponsors: string;
+  register: string;
 }
 
 export const baseRoutes: baseRoutes = {
   home: 'Home',
-  about: 'About',
-  register: 'Register',
+  schedule: 'Schedule',
+  faq: 'F.A.Q.',
   sponsors: 'Sponsors',
-  faq: 'Faq',
+  register: 'Register',
 };
 
 interface pastRoutes {
