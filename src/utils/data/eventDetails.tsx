@@ -47,19 +47,28 @@ interface Schedule {
 }
 
 export const schedule: Schedule = {
-  'Day 1 - July 17': [
-    { time: '9:00 AM', activity: 'Registration & Breakfast', description: 'Check-in, networking, and opening remarks' },
-    { time: '10:00 AM', activity: 'Opening Ceremony' },
-    { time: '11:00 AM', activity: 'Keynote Speaker' },
-    { time: '12:00 PM', activity: 'Lunch' },
-    { time: '1:00 PM', activity: 'Workshops & Sessions' },
-    { time: '5:00 PM', activity: 'Networking Event' },
+  'Friday | July 17': [
+    { time: '8:00 AM - 11:00 AM', activity: 'Registration & Check In', description: 'Coffee and breakfast will be provided to kickstart your day' },
+    { time: '10:00 AM', activity: 'Welcome Session', description: 'Get ready for introductions and an overview of CU Build' },
+    { time: '12:00 PM', activity: 'Lunch', description: 'Sandwich bar buffet to recharge before the coding frenzy begins' },
+    { time: '12:00 PM', activity: 'Start Coding', description: 'No coding until we say "Go"! Cheat sheets provided for Jack Henry access' },
+    { time: '6:00 PM', activity: 'Dinner', description: 'A pizza buffet will be brought in to keep your energy high' },
   ],
-  'Day 2 - July 18': [
-    { time: '9:00 AM', activity: 'Breakfast' },
-    { time: '10:00 AM', activity: 'Hackathon Begins' },
-    { time: '12:00 PM', activity: 'Lunch' },
-    { time: '6:00 PM', activity: 'Dinner & Team Presentations' },
+  'Saturday | July 18': [
+    { time: '8:00 AM - 10:00 AM', activity: 'Breakfast', description: 'A hearty breakfast to kickstart your second day of coding' },
+    { time: '12:00 PM', activity: 'Lunch', description: 'Enjoy a hot lunch to keep those ideas flowing' },
+    { time: '6:00 PM - 9:00 PM', activity: 'Reception & Dinner Buffet', description: 'Take a break, mingle, and enjoy dinner and drinks on us' },
+    { time: '12:00 PM', activity: 'Coding Ends', description: 'Submit your final code and get ready for the big day' },
+  ],
+  'Sunday | July 19': [
+    { time: '8:00 AM - 10:00 AM', activity: 'Breakfast', description: 'One last breakfast to get you energized for the final presentations' },
+    { time: '9:00 AM - 11:00 AM', activity: 'Teams Present', description: "It's showtime! Tell us your concept story" },
+    { time: '11:00 AM - 12:00 PM', activity: 'Final Judging', description: 'Enjoy drinks and snacks while our judges deliberate' },
+    {
+      time: '12:00 PM',
+      activity: 'Awards Presentation',
+      description: "The moment we've all been waiting for! Celebrate your achievements with more drinks and snacks",
+    },
   ],
 };
 
