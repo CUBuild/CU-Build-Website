@@ -2,18 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useActiveRoute from '../utils/hooks/useActiveRoute';
 import Logo from './Logo';
+import { socialMediaLinks, connect } from '../utils/data/eventDetails.js';
+import { baseRoutes, pastRoutes } from '../utils/data/routes.js';
 
 const Footer: React.FC = () => {
-  const homeRoute = useActiveRoute('/');
-  const scheduleRoute = useActiveRoute('/schedule');
-  const registerRoute = useActiveRoute('/register');
-  const sponsorsRoute = useActiveRoute('/sponsors');
-  const faqRoute = useActiveRoute('/faq');
-  const year2024Route = useActiveRoute('/2024');
-  const year2023Route = useActiveRoute('/2023');
-  const year2022Route = useActiveRoute('/2022');
-  const year2021Route = useActiveRoute('/2021');
-
   return (
     <footer className="bg-gray-800 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -30,46 +22,16 @@ const Footer: React.FC = () => {
           <div className="text-center md:text-left">
             <h5 className="font-semibold mb-4">Quick Links</h5>
             <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link
-                  to="/"
-                  className={`transition-colors hover:text-white ${homeRoute.isActive ? 'font-semibold' : ''}`}
-                  style={homeRoute.isActive ? { color: homeRoute.activeColor } : undefined}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/schedule"
-                  className={`transition-colors hover:text-white ${scheduleRoute.isActive ? 'font-semibold' : ''}`}
-                  style={scheduleRoute.isActive ? { color: scheduleRoute.activeColor } : undefined}>
-                  Schedule
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/register"
-                  className={`transition-colors hover:text-white ${registerRoute.isActive ? 'font-semibold' : ''}`}
-                  style={registerRoute.isActive ? { color: registerRoute.activeColor } : undefined}>
-                  Register
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/sponsors"
-                  className={`transition-colors hover:text-white ${sponsorsRoute.isActive ? 'font-semibold' : ''}`}
-                  style={sponsorsRoute.isActive ? { color: sponsorsRoute.activeColor } : undefined}>
-                  Sponsors
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/faq"
-                  className={`transition-colors hover:text-white ${faqRoute.isActive ? 'font-semibold' : ''}`}
-                  style={faqRoute.isActive ? { color: faqRoute.activeColor } : undefined}>
-                  FAQ
-                </Link>
-              </li>
+              {Object.entries(baseRoutes).map(([key, value]) => (
+                <li key={key}>
+                  <Link
+                    to={`/${value.toLowerCase()}`}
+                    className={`transition-colors hover:text-white ${useActiveRoute(value).isActive ? 'font-semibold' : ''}`}
+                    style={useActiveRoute(value).isActive ? { color: useActiveRoute(value).activeColor } : undefined}>
+                    {value as string}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -77,38 +39,16 @@ const Footer: React.FC = () => {
           <div className="text-center md:text-left">
             <h5 className="font-semibold mb-4">Previous Years</h5>
             <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link
-                  to="/2024"
-                  className={`transition-colors hover:text-white ${year2024Route.isActive ? 'font-semibold' : ''}`}
-                  style={year2024Route.isActive ? { color: year2024Route.activeColor } : undefined}>
-                  2024
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/2023"
-                  className={`transition-colors hover:text-white ${year2023Route.isActive ? 'font-semibold' : ''}`}
-                  style={year2023Route.isActive ? { color: year2023Route.activeColor } : undefined}>
-                  2023
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/2022"
-                  className={`transition-colors hover:text-white ${year2022Route.isActive ? 'font-semibold' : ''}`}
-                  style={year2022Route.isActive ? { color: year2022Route.activeColor } : undefined}>
-                  2022
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/2021"
-                  className={`transition-colors hover:text-white ${year2021Route.isActive ? 'font-semibold' : ''}`}
-                  style={year2021Route.isActive ? { color: year2021Route.activeColor } : undefined}>
-                  2021
-                </Link>
-              </li>
+              {Object.entries(pastRoutes).map(([key, value]) => (
+                <li key={key}>
+                  <Link
+                    to={`/${value.toLowerCase()}`}
+                    className={`transition-colors hover:text-white ${useActiveRoute(value).isActive ? 'font-semibold' : ''}`}
+                    style={useActiveRoute(value).isActive ? { color: useActiveRoute(value).activeColor } : undefined}>
+                    {value as string}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -116,14 +56,15 @@ const Footer: React.FC = () => {
           <div className="text-center md:text-left">
             <h5 className="font-semibold mb-4">Contact</h5>
             <ul className="space-y-2 text-gray-400">
-              <li>info@cubuild.com</li>
-              <li>(555) 123-4567</li>
+              {Object.entries(connect).map(([key, value]) => (
+                <li key={key}>{value as React.ReactNode}</li>
+              ))}
             </ul>
             <div className="mt-6">
               <h5 className="font-semibold mb-4">Follow Us</h5>
               <div className="flex justify-center md:justify-start space-x-4">
                 <a
-                  href="https://linkedin.com/company/cu-build"
+                  href={socialMediaLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors">
@@ -132,7 +73,7 @@ const Footer: React.FC = () => {
                   </svg>
                 </a>
                 <a
-                  href="https://discord.gg/cubuild"
+                  href={socialMediaLinks.discord}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors">
@@ -145,7 +86,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 CU Build. All rights reserved.</p>
+          <p>&copy; 2021 - {new Date().getFullYear()} CU Build. All rights reserved.</p>
         </div>
       </div>
     </footer>
