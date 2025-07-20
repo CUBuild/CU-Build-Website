@@ -6,6 +6,7 @@ import data2022 from './utils/data/past/2022.json';
 import data2023 from './utils/data/past/2023.json';
 import data2024 from './utils/data/past/2024.json';
 
+// TODO: work on SEO
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
