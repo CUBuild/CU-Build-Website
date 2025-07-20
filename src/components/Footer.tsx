@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left hidden sm:block">
             <h5 className="font-semibold mb-4">Quick Links</h5>
             <ul className="space-y-2 text-gray-400">
               {Object.entries(baseRoutes).map(([key, value]) => (

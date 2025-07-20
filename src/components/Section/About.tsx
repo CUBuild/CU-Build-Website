@@ -23,30 +23,54 @@ const dataCards = [
     bgColor: '#613395',
   },
 ];
-const innovcationCards = [
+const innovationCards = [
   {
     title: 'Innovate',
     description: 'Build cutting-edge solutions that transform the credit union industry',
     icon: <Lightbulb size={32} className="text-white" />,
     bgColor: 'yellow',
+    hover: 'hover:border-yellow-500',
+    from400: 'from-yellow-400',
+    from300: 'from-yellow-300',
+    to300: 'to-yellow-300',
+    to400: 'to-yellow-400',
+    to500: 'to-yellow-500',
   },
   {
     title: 'Collaborate',
     description: 'Work alongside industry experts and passionate professionals',
     icon: <Users size={32} className="text-white" />,
     bgColor: 'cyan',
+    hover: 'hover:border-cyan-500',
+    from400: 'from-cyan-400',
+    from300: 'from-cyan-300',
+    to300: 'to-cyan-300',
+    to400: 'to-cyan-400',
+    to500: 'to-cyan-500',
   },
   {
     title: 'Compete',
     description: 'Win amazing prizes while pushing the boundaries of innovation',
     icon: <Trophy size={32} className="text-white" />,
     bgColor: 'purple',
+    hover: 'hover:border-purple-500',
+    from400: 'from-purple-400',
+    from300: 'from-purple-300',
+    to300: 'to-purple-300',
+    to400: 'to-purple-400',
+    to500: 'to-purple-500',
   },
   {
     title: 'Network',
     description: 'Connect with peers and build lasting professional relationships',
     icon: <Users size={32} className="text-white" />,
     bgColor: 'green',
+    hover: 'hover:border-green-500',
+    from400: 'from-green-400',
+    from300: 'from-green-300',
+    to300: 'to-green-300',
+    to400: 'to-green-400',
+    to500: 'to-green-500',
   },
 ];
 
@@ -80,7 +104,7 @@ const About: React.FC = () => {
 
           {/* Innovation Cards */}
           <div className="grid grid-cols-2 gap-4">
-            {Object.entries(innovcationCards).map(([key, card]) => (
+            {Object.entries(innovationCards).map(([key, card]) => (
               <div
                 key={key}
                 className={`group relative p-6 rounded-2xl text-center cursor-pointer bg-white border-2 border-gray-100 hover:border-${card.bgColor}-500 shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-500`}
@@ -94,12 +118,12 @@ const About: React.FC = () => {
                   e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
                 }}>
                 <div
-                  className={`absolute inset-0 bg-gradient-to-r from-${card.bgColor}-400 to-${card.bgColor}-300 opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  className={`absolute inset-0 bg-gradient-to-r ${card.from400} ${card.to300} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                 <div
-                  className={`absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br from-${card.bgColor}-300 to-${card.bgColor}-400 opacity-0 group-hover:opacity-100 transition-all duration-500 transform rotate-45 group-hover:rotate-12`}></div>
+                  className={`absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br ${card.from300} ${card.to400} opacity-0 group-hover:opacity-100 transition-all duration-500 transform rotate-45 group-hover:rotate-12`}></div>
                 <div className="relative z-10">
                   <div
-                    className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-${card.bgColor}-300 to-${card.bgColor}-500 rounded-full flex items-center justify-center group-hover:animate-pulse`}>
+                    className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${card.from300} ${card.to500} rounded-full flex items-center justify-center group-hover:animate-pulse`}>
                     {card.icon}
                   </div>
                   <h4 className="font-bold text-gray-800 mb-3 text-lg">{card.title}</h4>

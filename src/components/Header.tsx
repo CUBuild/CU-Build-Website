@@ -25,17 +25,18 @@ const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {Object.entries(baseRoutes).map(([key, value]) => (
-              <Link
-                to={`/${value !== 'Home' ? (value as string).toLowerCase().replaceAll('.', '') : ''}`}
-                key={key}
-                className={`transition-colors ${
-                  useActiveRoute(`/${value as String}`).isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'
-                }`}
-                style={useActiveRoute(`/${value as String}`).isActive ? { color: useActiveRoute(`/${value as String}`).activeColor } : undefined}>
-                {value}
-              </Link>
-            ))}
+            {Object.entries(baseRoutes).map(([key, value]) => {
+              const path = `/${value !== 'Home' ? (value as string).toLowerCase().replaceAll('.', '') : ''}`;
+              return (
+                <Link
+                  to={`/${value !== 'Home' ? (value as string).toLowerCase().replaceAll('.', '') : ''}`}
+                  key={key}
+                  className={`transition-colors ${useActiveRoute(path).isActive ? 'font-semibold' : 'text-gray-600 hover:text-pink-500'}`}
+                  style={useActiveRoute(path).isActive ? { color: useActiveRoute(path).activeColor } : undefined}>
+                  {value}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile Menu Button */}
