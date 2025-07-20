@@ -22,7 +22,8 @@ const ScrollToTop: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
+    // <Router basename="/CU-Build-Website/">
+    <Router basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-cyan-50">
         <Header />
