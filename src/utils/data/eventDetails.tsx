@@ -1,3 +1,5 @@
+import type { Colors } from './colors';
+
 interface EventDetails {
   date: string;
   location: string;
@@ -36,20 +38,14 @@ export const socialMediaLinks: SocialMedia = {
   discord: 'https://discord.gg/cubuild',
 };
 
-interface SponsorshipDetailsItem {
+interface SponsorshipDetail {
   title: string;
   cost: string;
   benefits: string[];
-  color: string;
+  color: keyof Colors;
 }
 
-interface SponsorshipDetails {
-  platinum: SponsorshipDetailsItem;
-  gold: SponsorshipDetailsItem;
-  partner: SponsorshipDetailsItem;
-}
-
-export const sponsorshipDetails: SponsorshipDetails = {
+export const sponsorshipDetails: Record<string, SponsorshipDetail> = {
   platinum: {
     title: 'Platinum',
     cost: '$8,000',

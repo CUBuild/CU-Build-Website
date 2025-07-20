@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo';
 import { faqData } from '../../utils/data/faq';

@@ -141,7 +141,7 @@ const PastEvent: React.FC<PastEventProps> = ({ data }) => {
         <div>
           <h3 className="text-3xl font-bold text-center mb-12">Our {data.year} Sponsors</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {Object.entries(data.sponsors).map(([key, value]) => (
+            {Object.entries(data.sponsors).map(([key, _]) => (
               <div key={key} className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
                 <span className="text-gray-400">Sponsor Logo</span>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import sponsorData from '../../utils/data/sponsors.json';
 import { colors } from '../../utils/data/colors';
 import { details, sponsorshipDetails } from '../../utils/data/eventDetails';
@@ -9,7 +9,8 @@ const images = import.meta.glob('../../assets/sponsors/2025/*.png', { eager: tru
 const imageMap = Object.fromEntries(
   Object.entries(images).map(([path, module]) => {
     const fileName = path.split('/').pop(); // get just the file name
-    return [fileName, module.default]; // module.default is the actual URL
+    const mod = module as { default: string };
+    return [fileName, mod.default]; // module.default is the actual URL
   })
 );
 
@@ -58,27 +59,27 @@ const SponsorshipCard: React.FC<SponsorCardProps> = ({ level, color, size = 'sma
 };
 
 const Sponsorship: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    organization: '',
-    email: '',
-    phone: '',
-    message: '',
-    interestedTier: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   organization: '',
+  //   email: '',
+  //   phone: '',
+  //   message: '',
+  //   interestedTier: '',
+  // });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // Handle form submission logic here
+  //   console.log('Form submitted:', formData);
+  // };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -132,26 +133,28 @@ const Sponsorship: React.FC = () => {
 
         {/* Sponsorship Tiers */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {Object.entries(sponsorshipDetails).map(([key, details]) => (
-            <div
-              key={`sponsor-details-for-${details.title}`}
-              className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100 transform hover:scale-105 transition-transform">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">{details.title}</h3>
-                <p className="text-4xl font-bold" style={{ color: colors[details.color] }}>
-                  {details.cost}
-                </p>
+          {Object.entries(sponsorshipDetails).map(([key, details]) => {
+            return (
+              <div
+                key={`sponsor-details-for-${details.title}`}
+                className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100 transform hover:scale-105 transition-transform">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{details.title}</h3>
+                  <p className="text-4xl font-bold" style={{ color: colors[details.color] }}>
+                    {details.cost}
+                  </p>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {details.benefits.map((benefit: String, index: Number) => (
+                    <li key={`${key}-benefit-${index}`} className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="space-y-3 mb-8">
-                {details.benefits.map((benefit, index) => (
-                  <li key={`${key}-benefit-${index}`} className="flex items-center">
-                    <span className="text-green-500 mr-2">✓</span>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Contact Form */}

@@ -1,4 +1,4 @@
-interface Colors {
+export interface Colors {
   pink: string;
   green: string;
   cyan: string;
