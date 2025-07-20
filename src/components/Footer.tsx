@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
               {Object.entries(baseRoutes).map(([key, value]) => (
                 <li key={key}>
                   <Link
-                    to={`/${(value as string).toLowerCase()}`}
+                    to={`/${value !== 'Home' ? (value as string).toLowerCase().replaceAll('.', '') : ''}`}
                     className={`transition-colors hover:text-white ${useActiveRoute(value as string).isActive ? 'font-semibold' : ''}`}
                     style={useActiveRoute(value as string).isActive ? { color: useActiveRoute(value as string).activeColor } : undefined}>
                     {value as string}
