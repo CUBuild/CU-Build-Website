@@ -1,4 +1,61 @@
 import React, { useState } from 'react';
+import sponsorData from '../../utils/data/sponsors.json';
+import { colors } from '../../utils/data/colors';
+import { details, sponsorshipDetails } from '../../utils/data/eventDetails';
+
+// Import all images from a folder
+const images = import.meta.glob('../../assets/sponsors/2025/*.png', { eager: true });
+
+const imageMap = Object.fromEntries(
+  Object.entries(images).map(([path, module]) => {
+    const fileName = path.split('/').pop(); // get just the file name
+    return [fileName, module.default]; // module.default is the actual URL
+  })
+);
+
+interface SponsorCardProps {
+  level: string;
+  color: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+type Role = 'small' | 'medium' | 'large';
+
+const sizeMap: Record<Role, string[]> = {
+  large: ['md:grid-cols-3 gap-8', 'max-w-[300px] p-6'],
+  medium: ['md:grid-cols-4 gap-6', 'max-w-[240px] p-6'],
+  small: ['md:grid-cols-5 gap-4', 'max-w-[200px] p-4'],
+};
+
+const SponsorshipCard: React.FC<SponsorCardProps> = ({ level, color, size = 'small' }) => {
+  return (
+    <div className="mb-20">
+      <h3 className="text-3xl font-bold text-center mb-8" style={{ color: color }}>
+        {level} {level === 'Partner' ? 'Organizations' : 'Sponsors'}
+      </h3>
+
+      <div className={`${sizeMap[size][0]} grid grid-cols-2 items-center justify-items-center`}>
+        {sponsorData.sponsors
+          .filter((sponsor) => sponsor.level === level.toLowerCase())
+          .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }))
+          .map((sponsor, index) => (
+            <a key={`${level.toLowerCase()}-${index}`} href={sponsor.url} target="_blank" rel="noopener noreferrer">
+              <div
+                className={`${sizeMap[size][1]} w-full aspect-[3/2] bg-white rounded-lg shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform`}>
+                <div className="w-full h-full  rounded flex items-center justify-center">
+                  <img
+                    src={imageMap[sponsor.logo]}
+                    alt={`${level} ${level === 'Partners' ? 'Organizations' : 'Sponsors'} ${sponsor.title}`}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+              </div>
+            </a>
+          ))}
+      </div>
+    </div>
+  );
+};
 
 const Sponsorship: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -29,231 +86,90 @@ const Sponsorship: React.FC = () => {
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">Our Sponsors</h2>
 
         {/* Platinum Sponsors */}
-        <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center mb-8" style={{ color: '#e31a90' }}>
-            Platinum Sponsors
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={`platinum-${i}`}
-                className="w-full max-w-[300px] aspect-[3/2] bg-white rounded-lg shadow-lg p-6 flex items-center justify-center transform hover:scale-105 transition-transform">
-                <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
-                  <span className="text-gray-400 text-lg font-semibold">Platinum Sponsor {i}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <SponsorshipCard level="Platinum" color={colors.pink} size="large" />
 
         {/* Gold Sponsors */}
-        <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center mb-8 text-yellow-500">Gold Sponsors</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-items-center">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={`gold-${i}`}
-                className="w-full max-w-[240px] aspect-[3/2] bg-white rounded-lg shadow-lg p-6 flex items-center justify-center transform hover:scale-105 transition-transform">
-                <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
-                  <span className="text-gray-400 text-lg font-semibold">Gold Sponsor {i}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Partner Organizations */}
-        <div className="mb-20">
-          <h3 className="text-3xl font-bold text-center mb-8 text-purple-500">Partner Organizations</h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-center justify-items-center">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={`partner-${i}`}
-                className="w-full max-w-[200px] aspect-[3/2] bg-white rounded-lg shadow-lg p-4 flex items-center justify-center transform hover:scale-105 transition-transform">
-                <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center">
-                  <span className="text-gray-400 text-sm font-semibold">Partner {i}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <SponsorshipCard level="Gold" color={colors.yellow} size="medium" />
 
         {/* Integration Partners */}
         <div className="mb-20">
           <h3 className="text-3xl font-bold text-center mb-12 text-indigo-600">Integration Partners</h3>
           <div className="space-y-8">
-            {/* Integration Partner 1 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
-              <div className="w-full md:w-1/4 aspect-[3/2] bg-gray-100 rounded-lg flex items-center justify-center p-4">
-                <span className="text-gray-400 text-lg font-semibold">Partner Logo 1</span>
-              </div>
-              <div className="w-full md:w-3/4">
-                <h4 className="text-xl font-bold mb-3">Financial Core Integration</h4>
-                <ul className="space-y-2 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-                  </li>
-                </ul>
-              </div>
-            </div>
+            {sponsorData.sponsors
+              .filter((sponsor) => sponsor.isIntegrationPartner)
+              .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }))
+              .map((sponsor, _) => (
+                <div
+                  key={`integration-partner-${sponsor.title.replaceAll(' ', '-').toLowerCase()}`}
+                  className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
+                  {/* Integratio Partner Image */}
+                  <div className="w-full md:w-1/4 aspect-[3/2] rounded-lg flex items-center justify-center p-4">
+                    <img src={imageMap[sponsor.logo]} alt={`${sponsor.title}`} className="max-w-full max-h-full object-contain" />
+                  </div>
 
-            {/* Integration Partner 2 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
-              <div className="w-full md:w-1/4 aspect-[3/2] bg-gray-100 rounded-lg flex items-center justify-center p-4">
-                <span className="text-gray-400 text-lg font-semibold">Partner Logo 2</span>
-              </div>
-              <div className="w-full md:w-3/4">
-                <h4 className="text-xl font-bold mb-3">Payment Processing Solutions</h4>
-                <ul className="space-y-2 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Integration Partner 3 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-6 rounded-xl shadow-lg border-2 border-gray-100 hover:border-indigo-200 transition-all">
-              <div className="w-full md:w-1/4 aspect-[3/2] bg-gray-100 rounded-lg flex items-center justify-center p-4">
-                <span className="text-gray-400 text-lg font-semibold">Partner Logo 3</span>
-              </div>
-              <div className="w-full md:w-3/4">
-                <h4 className="text-xl font-bold mb-3">Digital Banking Platform</h4>
-                <ul className="space-y-2 text-gray-600">
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-indigo-500 mr-2">•</span>
-                    Architecto beatae vitae dicta sunt explicabo nemo enim ipsam.
-                  </li>
-                </ul>
-              </div>
-            </div>
+                  {/* Integration Information */}
+                  <div className="w-full md:w-3/4">
+                    <h4 className="text-xl font-bold mb-3">{sponsor.title}</h4>
+                    {sponsor.description && <p className="space-y-2 text-gray-600 mb-2">{sponsor.description}</p>}
+                    <ul className="space-y-2 text-gray-600">
+                      {sponsor.points?.map((point, index) => (
+                        <li key={`${sponsor.title}-point-${index}`} className="flex items-start">
+                          <span className="text-indigo-500 mr-2">•</span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
+
+        {/* Partner Organizations */}
+        <SponsorshipCard level="Partner" color={colors.yellow} />
 
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-16">Sponsorship Opportunities</h2>
 
         {/* Sponsorship Tiers */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {/* Platinum Tier */}
-          <div className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100 transform hover:scale-105 transition-transform">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">Platinum</h3>
-              <p className="text-4xl font-bold" style={{ color: '#e31a90' }}>
-                $10,000
-              </p>
+          {Object.entries(sponsorshipDetails).map(([key, details]) => (
+            <div
+              key={`sponsor-details-for-${details.title}`}
+              className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100 transform hover:scale-105 transition-transform">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">{details.title}</h3>
+                <p className="text-4xl font-bold" style={{ color: colors[details.color] }}>
+                  {details.cost}
+                </p>
+              </div>
+              <ul className="space-y-3 mb-8">
+                {details.benefits.map((benefit, index) => (
+                  <li key={`${key}-benefit-${index}`} className="flex items-center">
+                    <span className="text-green-500 mr-2">✓</span>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Premier logo placement
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>5 event tickets
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Keynote speaking opportunity
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Dedicated mentorship station
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Social media promotion
-              </li>
-            </ul>
-          </div>
-
-          {/* Gold Tier */}
-          <div className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100 transform hover:scale-105 transition-transform">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">Gold</h3>
-              <p className="text-4xl font-bold text-yellow-500">$5,000</p>
-            </div>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Logo on event materials
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>3 event tickets
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Workshop session
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Mentorship opportunities
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Brand recognition
-              </li>
-            </ul>
-          </div>
-
-          {/* Partner Organizations */}
-          <div className="bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100 transform hover:scale-105 transition-transform">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">Partner</h3>
-              <p className="text-4xl font-bold text-purple-500">Contact Us</p>
-            </div>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Logo on website
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>1 event ticket
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Networking opportunities
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Community involvement
-              </li>
-              <li className="flex items-center">
-                <span className="text-green-500 mr-2">✓</span>
-                Resource sharing
-              </li>
-            </ul>
-          </div>
+          ))}
         </div>
 
         {/* Contact Form */}
         <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl border-2 border-gray-100">
-          <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">Become a Sponsor</h3>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">Get Involved</h3>
+          <p className="text-gray-600 mb-6 text-center ">Reach out and inquire about sponsorship, partnership, integrations, or volunteering.</p>
+          <a href={details.sponsorship} target="_blank" rel="noopener noreferrer">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                className="py-4 px-8 rounded-xl font-bold text-white text-lg transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                style={{ backgroundColor: colors.pink }}>
+                2025 Prospectus
+              </button>
+            </div>
+          </a>
+
+          {/* TODO: form */}
+          {/* <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
@@ -331,7 +247,7 @@ const Sponsorship: React.FC = () => {
               style={{ backgroundColor: '#e31a90' }}>
               Submit Inquiry
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
     </section>

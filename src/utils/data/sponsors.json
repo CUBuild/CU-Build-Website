@@ -1,11 +1,185 @@
 {
   "sponsors": [
     {
-      "title": "Swivel",
+      "title": "SWIVEL",
       "url": "https://getswivel.io",
-      "logo": "https://getswivel.io/logo.png",
+      "logo": "swivel.png",
       "isIntegrationPartner": true,
-      "sponsorLevel": "Platinum"
+      "level": "platinum",
+      "description": "SWIVEL SDK; let us handle NACHA and PCI compliance so you can focus on your core business.",
+      "points": [
+        "Tokenization Experience - allows for creation of single-use token to take card payment details and process payment at a later time; excellent choice for NAO workflows.",
+        "ACH Web Verification Experience - integrated experience with our partner Finicity to confirm ownership of accounts before acceptance of ACH payments.",
+        "Loan Payment Experience - integrated UI that allows for members to make loan payments using Card and/or ACH rails."
+      ]
+    },
+    {
+      "title": "ASA",
+      "url": "https://asa.financial/",
+      "logo": "asa.png",
+      "isIntegrationPartner": true,
+      "level": "platinum",
+      "description": "ASA offers a secure financial platform to expand your digital presence, which can be seamlessly integrated within your home or mobile banking app, providing additional protection for the CU and its members.",
+      "points": [
+        "ASA extends the core with a RestFul Open API to allow the CU to partner with solution providers",
+        "ASA tokenizes member data to eliminate sharing unnecessary information with Fintechs",
+        "Extend your mobile banking app to Increase member usage in the app and become a digital hub for your members",
+        "Our SDK can be dropped into place within your existing app easily and quickly",
+        "Back Office CU portal that provides metrics, data insights, partner management, and a host of other products, services, and tools.",
+        "Dev account setup can be completed at https://developer.asavault.com/. Documentation in 31 languages is at https://docs.asavault.com/. Integration examples with all the code are at https://github.com/orgs/ASAFINANCIAL/repositories"
+      ]
+    },
+    {
+      "title": "Fivision",
+      "url": "https://www.fivision.com/",
+      "logo": "fivision.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "description": "Vendor Integration Program (VIP) Account Opening Solution Utilizing SymXchange",
+      "points": [
+        "No-Code Configuration for Decisioning",
+        "Fully Customizable Applicant Experience",
+        "API Support for Prefilling Applications",
+        "Test environment for solution verification"
+      ]
+    },
+    {
+      "title": "Libum",
+      "url": "https://libum.io/",
+      "logo": "libum.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "points": [
+        "NexumAPI as a Service (NaaS) - the fastest way to use SymXchange in any language and with JSON payloads.",
+        "PowerOn Pro+ - your development toolkit for PowerOn, within Visual Studio Code"
+      ]
+    },
+    {
+      "title": "Port X",
+      "url": "https://portx.io/",
+      "logo": "portx.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "description": "PortX is an integration technology company focused on financial services infrastructure that delivers open access to core data, enabling rapid project delivery, innovation, and optimal experiences for members and staff. Fintech Hub is an AI-powered Integration Platform as a Service that provides credit unions with the “integration toolbox” they need to connect with fintechs, launch projects faster, and eliminate vendor dependencies.",
+      "points": [
+        "Integration Manager streamlines the full API lifecycle with developer-friendly, AI-assisted functionality, enabling continuous delivery and deployment of integrations.",
+        "Payment Manager is an omni-channel payment platform that enables seamless, secure connections to networks like Fedwire, ACH, and FedNow through powerful APIs, offering flexible workflows, real-time capabilities, and built-in compliance features.",
+        "Data Manager provides a cost-efficient solution for integrating systems, cleansing data, and enabling real-time synchronization and reporting."
+      ]
+    },
+    {
+      "title": "Q2",
+      "url": "https://www.q2.com/",
+      "logo": "q2.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "points": ["Sandbox access to a Q2 development environment to create digital banking functionality"]
+    },
+    {
+      "title": "REPAY",
+      "url": "https://repay.com/",
+      "logo": "repay.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "description": "REPAY is an enterprise-wide payments platform designed to streamline transactions with real-time posting across all delivery channels.",
+      "points": [
+        "Secure Tokenization: Enables single-use, future transactions, and recurring payments across all delivery channels.",
+        "Instant Payment Processing: Real-time posting ensures payments are immediately applied to a member’s loan or share account.",
+        "Comprehensive Payments Hub: Seamlessly integrates with digital wallets, IVR, Text-to-Pay, agent-assisted services, mobile apps, web portals, online banking, and collections systems—directly connected to your core system.",
+        "Versatile Use Cases: Supports loan payments, new account openings, mortgage appraisals, share deposits, and external loan postings.",
+        "Expanded Payment Modalities: Accepts Visa, Mastercard, Discover, Apple Pay, PayPal, Venmo, Google Pay, ACH, eCash, and Instant Payments.",
+        "Enhanced Member Communication: Integrated delivery channels—including email and SMS notifications, Text-to-Pay, payment due reminders, statement presentment, IVR receipts, and past-due payment campaigns—enhance member engagement and drive on-time payments."
+      ]
+    },
+    {
+      "title": "Rise Analytics",
+      "url": "https://www.riseanalytics.com/",
+      "logo": "rise-analytics.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "description": "Rise Analytics, a Trellance Cooperative Holdings company, is the leading independent data analytics partner for credit unions, providing AI-powered insights to enhance performance, boost member engagement, and support compliance. They will be offering CU Build participants exclusive access to its enterprise-grade analytics platform. This hands-on opportunity enables credit unions to explore how Rise’s capabilities can drive strategic growth, improve operational efficiency, and deliver greater value to members.",
+      "points": [
+        "Ingest, integrate, and model data to rapidly test and validate new use cases across a range of business scenarios.",
+        "Query and move data using the platform's GraphQL APIs",
+        "Harness AI-powered tools to accelerate innovation",
+        "Access, develop, and easily customize Power BI reports to support forecasting and data-informed decision-making"
+      ]
+    },
+    {
+      "title": "SMA Technologies",
+      "url": "https://smatechnologies.com/",
+      "logo": "sma.png",
+      "isIntegrationPartner": true,
+      "level": "gold",
+      "description": "SMA Technologies is an automation partner for credit unions on the Jack Henry Symitar core. SMA provides a suite of tools to help credit unions automate and streamline processes across their organization.",
+      "points": [
+        "OpCon helps credit unions automate and orchestrate vital processes both inside and outside of the core.",
+        "Encapture intelligently processes documents to save time on loan processing and compliance.",
+        "Integrate is used to create lines of communication between disparate systems throughout the organization."
+      ]
+    },
+    {
+      "title": "Technology Happens",
+      "url": "https://www.technologyhappens.com/",
+      "logo": "technology-happens.png",
+      "isIntegrationPartner": false,
+      "level": "gold"
+    },
+    {
+      "title": "Tyfone",
+      "url": "https://tyfone.com/",
+      "logo": "tyfone.png",
+      "isIntegrationPartner": false,
+      "level": "gold"
+    },
+    {
+      "title": "Allied Solutions",
+      "url": "https://www.alliedsolutions.net/",
+      "logo": "allied-solutions.png",
+      "isIntegrationPartner": false,
+      "level": "partner"
+    },
+    {
+      "title": "American Airlines Credit Union",
+      "url": "https://www.aacreditunion.org/",
+      "logo": "american-airlines-credit-union.png",
+      "isIntegrationPartner": false,
+      "level": "partner"
+    },
+    {
+      "title": "Educators Credit Union",
+      "url": "https://www.ecu.com/",
+      "logo": "educators-credit-union.png",
+      "isIntegrationPartner": false,
+      "level": "partner"
+    },
+    {
+      "title": "Pinoeer Credit Union",
+      "url": "https://www.pioneerafcu.org/",
+      "logo": "pioneer.png",
+      "isIntegrationPartner": false,
+      "level": "partner"
+    },
+    {
+      "title": "Technology Happens",
+      "url": "https://www.technologyhappens.com/",
+      "logo": "technology-happens.png",
+      "isIntegrationPartner": false,
+      "level": "partner"
+    },
+    {
+      "title": "Jack Henry",
+      "url": "https://jackhenry.dev/",
+      "logo": "jack-henry.png",
+      "isIntegrationPartner": true,
+      "level": "partner",
+      "points": [
+        "Vendor Integration Program (VIP) development environment.",
+        "Xperience™",
+        "Synergy Enterprise Content Management™ (standalone)",
+        "jhaEnterprise Workflow™",
+        "PowerFrame™"
+      ]
     }
   ]
 }

@@ -2,6 +2,7 @@ interface EventDetails {
   date: string;
   location: string;
   capacity: string;
+  sponsorship: string;
   earlyBirdPrice: string;
   regularPrice: string;
 }
@@ -10,6 +11,7 @@ export const details: EventDetails = {
   date: 'October 15-16, 2024',
   location: 'Innovation Center, Denver, CO',
   capacity: '200 participants',
+  sponsorship: 'https://www.cubuild.org/_files/ugd/658176_b9e608770d1b4c3883364da85d4d28ba.pdf',
   earlyBirdPrice: '$149',
   regularPrice: '$199',
 };
@@ -32,6 +34,47 @@ interface SocialMedia {
 export const socialMediaLinks: SocialMedia = {
   linkedin: 'https://www.linkedin.com/company/cu-build',
   discord: 'https://discord.gg/cubuild',
+};
+
+interface SponsorshipDetailsItem {
+  title: string;
+  cost: string;
+  benefits: string[];
+  color: string;
+}
+
+interface SponsorshipDetails {
+  platinum: SponsorshipDetailsItem;
+  gold: SponsorshipDetailsItem;
+  partner: SponsorshipDetailsItem;
+}
+
+export const sponsorshipDetails: SponsorshipDetails = {
+  platinum: {
+    title: 'Platinum',
+    cost: '$8,000',
+    benefits: [
+      'Premier logo placement',
+      '2 event tickets',
+      'Dinner Sponsor',
+      'Keynote speaking opportunity',
+      'Social media promotion',
+      'Dedicated booth space',
+    ],
+    color: 'pink',
+  },
+  gold: {
+    title: 'Gold',
+    cost: '$4,500',
+    benefits: ['Logo on event materials', '2 event tickets', 'Social media promotion', 'Dedicated booth space'],
+    color: 'yellow',
+  },
+  partner: {
+    title: 'Partner',
+    cost: 'Contact Us',
+    benefits: ['Logo on website', 'Networking opportunities', 'Community involvement', 'Resource sharing'],
+    color: 'purple',
+  },
 };
 
 interface ScheduleItem {
